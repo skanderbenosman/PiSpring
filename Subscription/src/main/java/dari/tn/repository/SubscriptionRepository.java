@@ -8,7 +8,6 @@ import dari.tn.model.Subscription;
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer>  
 {
 
-    List<Subscription> findSubscriptionByTitle(String Title);
 
 
 }  

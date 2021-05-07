@@ -26,14 +26,16 @@ import dari.tn.service.SubscriptionService;
 @Scope(value = "session")
 @Controller(value = "subscriptionController")
 @ELBeanName(value = "subscriptionController")
-@Join(path = "/", to = "/login.jsf")public class SubscriptionController{
+@Join(path = "/", to = "/Subs.jsf")public class SubscriptionController{
 	@Autowired  
 	SubscriptionService abonnementService;
 	
 	@GetMapping("/getall")  
-	private List<Subscription> getAllSubscriptions()   
+	private List<Subscription> getAllSubs()   
 	{  
+		 System.out.println("done");
 	return abonnementService.getAllSubscriptions();  
+
 	}  
 	
 	@GetMapping("/get/{abonnement_id}")  

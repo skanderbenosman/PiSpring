@@ -31,7 +31,7 @@ color: white;
 <h:panelGroup columns="2">
 <h:form>
 <h:commandButton value="Go to page 1" action="/Subscribers.xhtml?faces-redirect=true" />
-<h:dataTable class="table" value="#{subscriptionController.getall()}" var="subs" border="1">
+<h:dataTable class="table" value="#{subscriptionController.getAllSubs()}" var="subs" border="1">
 <h:column><f:facet name="header"><h:outputText value="title" /></f:facet>
 <h:outputText value="#{subs.subscription_title}" /></h:column>
 <h:column><f:facet name="header"><h:outputText value="description" /></f:facet>
@@ -43,7 +43,6 @@ color: white;
 <h:commandButton action="#{subscriptionController.subscribe()}"
 value="Supprimer" />
 </h:column>
-<h:column>
 
      
 </h:dataTable>
