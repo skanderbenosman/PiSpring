@@ -40,14 +40,11 @@ color: white;
 <h:outputText value="#{subs.subscription_price}" /></h:column>
 <h:column>
 <f:facet name="header"><h:outputText value="Subscribe" /></f:facet>
-<h:commandButton action="#{subscriptionController.removeAds(ads.id)}"
+<h:commandButton action="#{subscriptionController.subscribe()}"
 value="Supprimer" />
 </h:column>
 <h:column>
-<f:facet name="header"><h:outputText value="Action" /></f:facet>
-<h:commandButton action="#{AdsController.updateStateAds(ads.id)}"
-value="Update" />
-</h:column>
+
      
 </h:dataTable>
 </h:form>
