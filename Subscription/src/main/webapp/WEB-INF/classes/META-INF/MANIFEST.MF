@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: Abonnement2
+Implementation-Version: 1.0
+Built-By: Chabchoub
+Implementation-Vendor-Id: dari.tn
+Build-Jdk: 1.8.0_144
+Implementation-URL: https://spring.io/projects/spring-boot/Abonnement2
+Created-By: Maven Integration for Eclipse
+
