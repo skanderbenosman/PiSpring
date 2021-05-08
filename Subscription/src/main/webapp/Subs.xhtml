@@ -30,7 +30,7 @@ color: white;
 </h:head>
 <h:panelGroup columns="2">
 <h:form>
-<h:commandButton value="Go to page 1" action="/Subscribers.xhtml?faces-redirect=true" />
+<h:commandButton value="Go to page 1" action="/welcome.xhtml?faces-redirect=true" />
 <h:dataTable class="table" value="#{subscriptionController.getAllSubs()}" var="subs" border="1">
 <h:column><f:facet name="header"><h:outputText value="title" /></f:facet>
 <h:outputText value="#{subs.subscription_title}" /></h:column>
@@ -40,7 +40,7 @@ color: white;
 <h:outputText value="#{subs.subscription_price}" /></h:column>
 <h:column>
 <f:facet name="header"><h:outputText value="Subscribe" /></f:facet>
-<h:commandButton action="#{subscriptionController.subscribe()}"
+<h:commandButton action="#{subscriptionController.Subscribe()}"
 value="Supprimer" />
 </h:column>
 
