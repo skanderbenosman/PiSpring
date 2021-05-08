@@ -26,7 +26,7 @@ import dari.tn.service.SubscriptionService;
 @Scope(value = "session")
 @Controller(value = "subscriptionController")
 @ELBeanName(value = "subscriptionController")
-@Join(path = "/", to = "/Subs.jsf")public class SubscriptionController{
+@Join(path = "/", to = "/login.jsf")public class SubscriptionController{
 	@Autowired  
 	SubscriptionService abonnementService;
 	
