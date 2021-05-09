@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+<h:head>  
+<title>User Details</title>  
+<h:outputStylesheet name="/css/bootstrap.min.css"/>  
+<style type="text/css">  
+table {  
+border-collapse: collapse;  
+width: 100%;  
+}  
+th, td {  
+text-align: left;  
+padding: 8px;  
+}  
+  
+tr:nth-child(even){background-color: #f2f2f2}  
+th {  
+background-color: #4CAF50;  
+color: white;  
+}  
+</style>  
+</h:head>
+<div class="container">
+<h:panelGroup columns="2">
+<h:form>
+
+<h:dataTable class="table" value="#{AdsController.getEmployes2()}" var="ads" border="1"
+selection="#{AdsController.selectedProducts}"   rowSelectMode="add">
+
+            
+<h:column sortBy="#{ads.title}" filterBy="#{ads.title}"><f:facet name="header"><h:outputText value="title" /></f:facet>
+<h:outputText value="#{ads.title}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="description" /></f:facet>
+<h:outputText value="#{ads.description}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="address" /></f:facet>
+<h:outputText value="#{ads.address}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="Price" /></f:facet>
+<h:outputText value="#{ads.price}" /></h:column>
+
+
+<h:column><f:facet name="header"><h:outputText value="swimmingPool" /></f:facet>
+<h:outputText value="#{ads.swimmingPool == true ? 'Oui' : 'Non'}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="garage" /></f:facet>
+<h:outputText value="#{ads.garage == true ? 'Oui' : 'Non'}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="garden" /></f:facet>
+<h:outputText value="#{ads.garden == true ? 'Oui' : 'Non'}" /></h:column>
+<h:column>
+<f:facet name="header"><h:outputText value="Action" /></f:facet>
+<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-images" process="@this"
+                                  action="#{AdsController.deleteProduct()}">
+                    <f:setPropertyActionListener value="#{ads}" target="#{AdsController.selectedProduct}"/>
+                </p:commandButton>
+               
+</h:column>
+<!-- <h:column>
+<f:facet name="header"><h:outputText value="Action" /></f:facet>
+<p:commandButton icon="pi pi-pencil" action="#{AdsController.updateStateAds(ads.id)}"
+ />
+<p:commandButton icon="pi pi-trash" action="#{AdsController.removeAds(ads.id)}"
+ />
+</h:column> -->
+     
+</h:dataTable>
+<p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                         message="Delete the product?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes#{AdsController.selectedProduct.address}" icon="pi pi-check" actionListener="#{AdsController.deleteProduct()}"
+                             process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deleteProductDialog').hide()"/>
+        </p:confirmDialog>
+
+</h:form>
+
+
+</h:panelGroup>
+</div>
+
+</ui:define>
+
+</ui:composition>
