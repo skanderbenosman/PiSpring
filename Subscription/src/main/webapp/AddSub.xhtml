@@ -20,12 +20,11 @@ template="/template/template.xhtml">
 
 
 <tr><td colspan="2"> <h:commandButton value="Ajouter Abonnement"
-action="#{subscriptionController.saveSubscription()}" />
+action="#{subscriptionController.addSubscription()}" />
 <h:commandButton value="update sub"
-action="#{subscriptionController.update()}" /></td></tr>
+action="#{subscriptionController.edit(subscriptionController.subscription_id)}" /></td></tr>
 
 </table></h:form></h:panelGroup>
-
 </ui:define>
 </ui:composition>
 
