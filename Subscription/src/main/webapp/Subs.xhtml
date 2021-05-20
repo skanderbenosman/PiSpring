@@ -29,8 +29,16 @@ color: white;
 </style>  
 </h:head>
 <h:panelGroup columns="2">
+
+<h:panelGroup columns="2"><h:form><table>
+<tr><td><h:inputText  value="#{subscriptionController.word}">
+<tr><h:commandButton value="Rechercher" action="#{subscriptionController.Search(word)}" /></tr>
+</h:inputText></td></tr>
+</table></h:form></h:panelGroup>
+
 <h:form>
-<h:commandButton value="Go to page 1" action="/AddSub.xhtml?faces-redirect=true" />
+<h:commandButton value="Add Subscription" action="/AddSub.xhtml?faces-redirect=true" />
+
 <h:dataTable class="table" value="#{subscriptionController.getAllSubs()}" var="subs" border="1">
 <h:column><f:facet name="header"><h:outputText value="title" /></f:facet>
 <h:outputText value="#{subs.subscription_title}" /></h:column>

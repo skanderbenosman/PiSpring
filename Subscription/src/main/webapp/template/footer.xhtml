@@ -3,8 +3,241 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:panelGroup>
-<br /> Mettez ici un pied de page ! <br /><br />
-</h:panelGroup>
+<html lang="fr">
+<head>
+    <title>canvas rec</title> 
+    <meta charset="utf-8"></meta>
+ 
+<script type="text/javascript"> 
+
+ var media_rec=''
+
+ var strm=""
+
+ var chunks = [];
+
+ var video_url=""
+
+ var blob=""
+
+ var stream_cvs ='cvb'
+
+
+function ouvrir_camera(){
+
+ navigator.mediaDevices.getUserMedia({ audio: true,video: { width: 320, height: 180 } })
+
+   .then(function(stream) {
+
+   strm=stream
+
+   document.getElementById('direct').srcObject=stream;
+   document.getElementById('direct').play();
+
+   setInterval(pixel,40);
+
+   document.getElementById('direct').oncanplay= canvas_stream
+  })
+ 
+   .catch(function(err) {
+  console.log('erreur detecté: ' + err);
+ })
+}
+
+function canvas_stream() {
+
+ stream_cvs =document.getElementById('rendu').captureStream()
+
+ var all_track_audio=strm.getTracks()
+
+ for(var i=0; i<all_track_audio.length/>;i++){
+
+  if(all_track_audio[i].kind=="audio"){
+
+   console.log(all_track_audio[i].kind);
+
+   stream_cvs.addTrack(all_track_audio[i]);
+
+   break;
+  }
+ }
+ init_rec();
+}
+
+
+function init_rec() {
+
+ media_rec = new MediaRecorder(stream_cvs);
+
+  media_rec.onstop = function(e) {
+
+   blob = new Blob(chunks, { 'type' : 'video/webm; codecs=opus' });
+   chunks = [];
+   video_url = window.URL.createObjectURL(blob);
+
+   document.getElementById('resultat').src = video_url;
+
+   console.log("arret de l'enregistrement");
+   }
+
+ media_rec.ondataavailable = function(e) {
+  chunks.push(e.data);
+ }
+}
+
+
+function rec() {
+
+ 
+ window.URL.revokeObjectURL(video_url);
+ chunks = [];
+ media_rec.start();
+ console.log(media_rec.state);
+ console.log("demarage enregistrement");
+ document.getElementById('marche').style.color = "red";
+}
+
+function arret_rec(){
+
+ media_rec.stop();
+ console.log(media_rec.state);
+ document.getElementById('marche').style.color = "black";
+}
+
+function fermer_camera(){
+
+ var mediaStream=strm;
+ console.log('etat >>> '+mediaStream)
+ var tracks = mediaStream.getTracks();
+
+ for(var i=0; i<tracks.length/>;i++){
+  console.log(tracks.length);
+  tracks[i].stop();
+  console.log("message: "+tracks[i].label+" déconnecté");
+ }
+
+ strm = null;
+}
+
+
+function telecharger(){
+
+ if(navigator.msSaveOrOpenBlob){
+
+  var blobObject=blob
+
+  window.navigator.msSaveOrOpenBlob(blobObject, "video.webm");
+ }
+
+ else{
+
+  var elem = document.createElement('a');
+  elem.href = video_url;
+  elem.download = "video.webm";
+  var evt = new MouseEvent("click", { bubbles: true,cancelable: true,view: window,});
+  elem.dispatchEvent(evt);
+     }
+    }
+
+
+function envoi(){
+
+ console.log(blob.type);
+
+ var formImage = new FormData();
+ formImage.append('image_a', blob, 'image_a.webm');
+
+ var ajax = new XMLHttpRequest();
+
+ ajax.open("POST","http://scriptevol.free.fr/contenu/reception/upload_camera.php",true);
+
+ ajax.onreadystatechange=function(){
+
+  if (ajax.readyState == 4 &amp;&amp; ajax.status==200){
+
+   console.log(ajax.responseText+" _envoie terminé");
+   document.getElementById("jaxa").innerHTML+=(ajax.responseText);
+  }
+ }
+
+ ajax.onerror=function(){
+
+  alert("la requette a échoué");
+ }
+
+ ajax.send(formImage);
+ console.log("envoie en cours");
+}
+
+
+function pixel(){
+
+ var vivi = document.getElementById('direct');
+
+ var moncanvas2d=document.getElementById('intermediaire').getContext('2d');
+ moncanvas2d.drawImage(vivi,0,0,320,180);
+ var idata=moncanvas2d.getImageData( 0, 0, 500, 500);
+ var data =  idata.data;
+ var taille=500*4
+ var pixeli=40
+
+ for(var i = 0; i &lt; data.length; i+=taille*2){
+
+  for(var j = 0; j &lt; taille; j+=pixeli){
+
+   var coulcourante1=data[i+j];
+   var coulcourante2=data[i+j+1];
+   var coulcourante3=data[i+j+2];
+
+   for(var k = 0; k &lt; pixeli; k+=4){ 
+    data[i+j+k]=coulcourante1;
+    data[i+j+k+1]=coulcourante2;
+    data[i+j+k+2]=coulcourante3;
+
+    data[i+j+k+taille]=coulcourante1;
+    data[i+j+k+1+taille]=coulcourante2;
+    data[i+j+k+2+taille]=coulcourante3;
+   }
+  }
+ }
+ idata.data=data
+ document.getElementById('rendu').getContext('2d').putImageData(idata,0,0);
+}
+ 
+</script>
+</head> 
+<body>
+
+<video id='direct'  height='180' width='320' controls="controls">
+
+</video>
+
+<canvas id='intermediaire' height='180' width='320' style='display:none'></canvas>
+<canvas id='rendu' height='180' width='320' style='background:gray'></canvas>
+
+<video id='resultat'  height='180' width='320' controls="controls"></video>
+
+<br><br></br></br>
+<button onclick="ouvrir_camera()" style='height:50px;width:100px;margin:auto'>ouvrir camera</button>
+<button id='fermer' style='height:50px;width:100px;margin:auto' onclick='fermer_camera()'>fermer camera</button> 
+<br><br></br></br>
+ 
+<button id='marche' onclick="rec()" style='height:50px;width:100px;margin:auto'>enregistrer</button>
+<button onclick="arret_rec()" style='height:50px;width:100px;margin:auto'>arreter</button>
+<br><br></br></br>
+
+
+<button id='envoi' onclick="envoi()" style='height:50px;width:100px;margin:auto'>envoyer</button>
+<button onclick="telecharger()" style='height:50px;width:100px;margin:auto'>telecharger</button>
+<br></br>
+
+<br></br>
+<div id='sauver'></div>
+<br></br>
+
+<div id="jaxa"></div>
+
+</body>
+</html>
 
 </ui:composition>

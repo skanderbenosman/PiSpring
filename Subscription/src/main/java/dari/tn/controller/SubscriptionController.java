@@ -32,6 +32,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.cj.Query;
+
+import dari.tn.model.Subscribe;
 import dari.tn.model.Subscription;
 import dari.tn.service.SubscriptionService;
 
@@ -63,7 +66,11 @@ import dari.tn.service.SubscriptionService;
 	public List<Subscription> getAllSubs()   
 	{  
 		 System.out.println("done");
-	ListSubs= abonnementService.getAllSubscriptions();  
+    if (word== null){
+		ListSubs = abonnementService.getAllSubscriptions();}
+		else {
+			ListSubs=abonnementService.Search(word);
+		}
 	return ListSubs;  
 
 	}  
@@ -135,13 +142,15 @@ import dari.tn.service.SubscriptionService;
 	return abonnement;  
 	}  
 	
-    @PostMapping("/abonner")
+    @PostMapping("/addsubscribe")
     @ResponseBody
-    public ResponseEntity<?> Add(@RequestBody Subscription s){
-        Subscription sub = abonnementService.Add(s);
-        return new ResponseEntity<>( " Subscription added. ",  HttpStatus.OK);
+    public ResponseEntity<?> AddS(@RequestBody Subscribe s){
+        Subscribe su = abonnementService.AddSubTo(s.getSubscription().getSubscription_id(),s.getUtilisateur().getUtilisateurId(),s.getDateD(),s.getDateF());
+        return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
+
     }
-    
+
+	
 	public String addSubscription()  {
 		
 		Subscription sub=new Subscription();
@@ -200,6 +209,22 @@ import dari.tn.service.SubscriptionService;
 		return "/Subs.xhtml?faces-redirect=true";        
 		}  
 	
+	public String word ;
+	
+	public String getWord() {
+		return word;
+	}
+
+	public void setWord(String word) {
+		this.word = word;
+	}
+
+	public List<Subscription> Search(String word) {
+
+		return abonnementService.Search(word);
+		
+	}
+
 	
     }
 	
