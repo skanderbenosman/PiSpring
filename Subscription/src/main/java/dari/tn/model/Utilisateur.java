@@ -22,20 +22,20 @@ public  class Utilisateur implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 537136081490133106L;
+	public static final long serialVersionUID = 537136081490133106L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long utilisateurId;
+    public Long utilisateurId;
 
-    private String lastName;
-    private String firstName;
-    private String password;
-    private String phone;
-    private Region Region;
-    private String email;
-    private Instant created;
-    private boolean subscribed;
+	public String lastName;
+    public String firstName;
+    public String password;
+    public String phone;
+    public Region Region;
+    public String email;
+    public Instant created;
+    public boolean subscribed;
     public SubType SubscriptionType;
 	public Long getUtilisateurId() {
 		return utilisateurId;

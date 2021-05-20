@@ -13,15 +13,18 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.servlet.http.HttpServletRequest;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -149,7 +153,11 @@ import dari.tn.service.SubscriptionService;
         return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
 
     }
-
+    
+    @GetMapping("/End/{idS}")
+    public Subscribe End(@PathVariable int idS){
+        return abonnementService.EndAbo(idS);
+    }
 	
 	public String addSubscription()  {
 		
@@ -225,7 +233,25 @@ import dari.tn.service.SubscriptionService;
 		
 	}
 
-	
+    @Value("${STRIPE_PUBLIC_KEY}")
+    private String stripePublicKey;
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("amount", 50 * 100); // In cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        return "index";
+    }
+
+   
+    @RequestMapping(value = "/charge", method = RequestMethod.POST)
+    public String chargeCard(HttpServletRequest request) throws Exception {
+        String token = request.getParameter("stripeToken");
+        Double amount = Double.parseDouble(request.getParameter("amount"));
+        abonnementService.chargeNewCard(token, amount);
+        return "result";
+    }
+
     }
 	
 

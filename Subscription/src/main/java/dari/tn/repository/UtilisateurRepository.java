@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import dari.tn.model.Utilisateur;
 
-public interface UtilisateurRepository extends CrudRepository<Utilisateur, Integer>  
+public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long>  
 {
 
 

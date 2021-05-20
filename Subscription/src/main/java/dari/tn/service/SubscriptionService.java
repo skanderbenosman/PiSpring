@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
 
 import dari.tn.model.Subscription;
 import dari.tn.model.Utilisateur;
@@ -116,6 +118,19 @@ public void insertWithQuery(Subscribe sub) {
 @Value("${STRIPE_SECRET_KEY}")
 private String API_SECRET_KEY;
 
+@Autowired
+public void SubscriptionRepository() {
+    Stripe.apiKey = API_SECRET_KEY;
+}
+
+public Charge chargeNewCard(String token, double amount) throws Exception {
+    Map<String, Object> chargeParams = new HashMap<>();
+    chargeParams.put("amount", (int)(amount * 100));
+    chargeParams.put("currency", "USD");
+    chargeParams.put("source", token);
+    Charge charge = Charge.create(chargeParams);
+    return charge;
+}
 
 
 public List<Subscription> Search(String word) {
