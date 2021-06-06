@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:head>  
+
+<title>User Details</title>  
+
+<style type="text/css">  
+table {  
+border-collapse: collapse;  
+width: 100%;  
+}  
+th, td {  
+text-align: left;  
+padding: 8px;  
+}  
+  
+tr:nth-child(even){background-color: #f2f2f2}  
+th {  
+background-color: #4CAF50;  
+color: white;  
+}  
+</style>
+<h:outputStylesheet name="/css/bootstrap.min.css"/>  
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"></link>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+<h:panelGroup styleClass="ui-icon ui-icon-mail-closed" />
+</h:head>
+ <h:inputText style="margin-left:140px"  value="#{contratController.word}"></h:inputText>
+<h:commandButton value="Rechercher" action="#{contratController.Search(word)}" />      
+<br></br><br></br><br></br>
+<center>
+<h:dataTable binding="#{table}" value="#{contratController.contrats}" var="contrat" border="1">
+ <h:column>
+<f:facet name="header">
+<h:outputText class="control-label col-sm-4" value="description" />
+</f:facet>
+<h:outputText value="#{contrat.description}" />
+</h:column>
+
+
+<h:column>
+<f:facet name="header">
+<h:outputText class="control-label col-sm-4" value="titre" />
+</f:facet>
+<h:outputText value="#{contrat.titre}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText class="control-label col-sm-4" value="advertisement" />
+</f:facet>
+<h:outputText  value="#{contrat.advertisement.address}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="dateS" />
+</f:facet>
+<h:outputText value="#{contrat.dateS}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText class="control-label col-sm-4" value="status" />
+</f:facet>
+<h:outputText value="#{contrat.status}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText class="control-label col-sm-4" value="area/m2" />
+</f:facet>
+<h:outputText  value="#{contrat.advertisement.area}" />
+</h:column>
+
+
+<h:column>
+<f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton class="fa fa-trash-restore-alt" action="#{contratController.removeContrat(contrat.id)}">
+<i class="fas fa-trash-alt"></i>
+</h:commandButton>
+ <h:commandButton action="#{contratController.removeContrat(contrat.id)}">
+<a class="btn btn-danger" href="#{contratController.removeContrat(contrat.id)}">
+  <i class="fa fa-trash-o fa-lg"></i></a></h:commandButton>
+<h:commandButton>
+<a class="btn btn-success" href="#">
+  <i class="fa fa-pencil fa-lg"></i></a></h:commandButton>
+</h:column>
+</h:dataTable>
+</center>
+</ui:define>
+</ui:composition>
+
