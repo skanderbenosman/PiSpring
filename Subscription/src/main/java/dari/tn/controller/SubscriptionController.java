@@ -148,10 +148,9 @@ import dari.tn.service.SubscriptionService;
 	
     @PostMapping("/addsubscribe")
     @ResponseBody
-    public ResponseEntity<?> AddS(@RequestBody Subscribe s){
+    public  String AddS(@RequestBody Subscribe s){
         Subscribe su = abonnementService.AddSubTo(s.getSubscription().getSubscription_id(),s.getUtilisateur().getUtilisateurId(),s.getDateD(),s.getDateF());
-        return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
-
+        return " ";
     }
     
     @GetMapping("/End/{idS}")
