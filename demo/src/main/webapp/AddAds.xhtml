@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Ajout" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+<div class="container">
+<h:panelGroup columns="2">
+
+
+
+	<h3>Upload Page</h3>
+
+		<h:form ><table>
+<tr><td><h:outputText value="address"></h:outputText></td><td><h:inputText
+value="#{AdsController.address}" required="true"></h:inputText></td></tr>
+<tr><td><h:outputText value="descriptione"></h:outputText></td>
+<td><h:inputText value="#{AdsController.description}" required="true"></h:inputText></td></tr>
+<tr><td><h:outputText value="title"></h:outputText></td>
+<td><h:inputText value="#{AdsController.title}" required="true"></h:inputText></td></tr>
+<tr><td><h:outputText value="swimmingPool"></h:outputText></td>
+<td><h:selectBooleanCheckbox
+value="#{AdsController.swimmingPool}"></h:selectBooleanCheckbox></td></tr>
+<tr><td><h:outputText value="garden"></h:outputText></td>
+<td><h:selectBooleanCheckbox
+value="#{AdsController.garden}"></h:selectBooleanCheckbox></td></tr>
+<tr><td><h:outputText value="garage"></h:outputText></td>
+<td><h:selectBooleanCheckbox
+value="#{AdsController.garage}"></h:selectBooleanCheckbox></td></tr>
+<tr><td><p:outputLabel   value="price"/></td>
+<td>  <p:inputText   value="#{AdsController.Image}" required="true" /></td></tr>
+
+<tr><td>
+ <p:fileUpload value="#{AdsController.file}" mode="simple" skinSimple="true"/>
+ 
+</td></tr>
+<tr><td colspan="2"> <h:commandButton value="Ajouter ads"
+action="#{AdsController.addAdv()}" />
+
+</td></tr>
+
+</table>
+</h:form>
+
+	
+</h:panelGroup>
+</div>
+
+</ui:define>
+
+</ui:composition>
