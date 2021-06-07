@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/template.xhtml">
+<ui:define name="menu">
+
+  <h:panelGroup columns="2">
+
+
+
+</h:panelGroup>
+
+
+        <div id="form" class="card text-dark " style="width:600px;heigth:600px;margin-left:300px;color:#111">
+  <div class="card-header" style="color: red;">Acheter</div>
+  <div class="card-body" style="position:center">
+     <div class="form-group" id="form">
+                <h:panelGroup columns="2">
+
+
+
+
+<h:form id="form">
+ <div class="form-group">
+    <label for="exampleInputPassword1">Annonce</label>
+    <h:selectOneMenu value="#{contratController.selectedadsid}">
+<f:selectItem itemLabel="Choisir un advertisement" itemValue="#{null}" />
+<f:selectItems value="#{AdsController.getAdss()}" var="Ads" 
+itemLabel="#{Ads.getAddress()}" itemValue="#{Ads.getId()}" />
+</h:selectOneMenu>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">titre</label>
+    <h:inputText type="email"  value="#{contratController.titre}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></h:inputText>
+    
+  </div>
+ 
+  <div class="form-group">
+    <label for="exampleInputPassword1">description</label>
+    <h:inputTextarea type="password" row="5" cols="30" value="#{contratController.description}" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </h:inputTextarea>
+    
+  </div>
+  <h:commandButton id="btn" value="Save"  action="#{contratController.ajouterContrat()}" class="btn btn-success" style="width: 80px;"></h:commandButton>
+<h:message for="btn" style="color:red"/>
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+
+
+
+</h:panelGroup>
+            </div>
+            
+                 
+            
+            
+  </div>
+  </div>
+  
+  
+</ui:define>
+</ui:composition>
+</html>

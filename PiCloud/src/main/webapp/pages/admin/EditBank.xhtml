@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/template.xhtml">
+
+<ui:define name="menu">
+
+
+<h:panelGroup columns="2">
+
+
+
+</h:panelGroup>
+
+
+        <div class="card text-dark " style="width:400px;heigth:600px;margin-left:300px;color:#111">
+  <div class="card-header" style="color: red;">Acheter</div>
+  <div class="card-body" style="position:center">
+     <div class="form-group">
+                <h:panelGroup columns="2">
+<h:form>
+<table>
+
+
+<tr>
+<td><h:outputText value="nameBank">
+</h:outputText>
+</td>
+<td><h:inputText value="#{bankController.nameBank}">
+</h:inputText>
+</td>
+</tr>
+<tr></tr>
+
+<tr>
+
+<td  colspan="2">
+ <h:commandButton value="update"  action="#{bankController.update()}" class="btn btn-success" style="width: 80px;"></h:commandButton>
+</td>
+
+</tr>
+</table>
+
+
+
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+
+
+
+</h:panelGroup>
+            </div>
+            
+                 
+            
+            
+  </div>
+  </div>
+</ui:define>
+</ui:composition>
+</html>
