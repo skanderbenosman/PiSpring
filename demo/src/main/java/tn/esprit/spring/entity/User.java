@@ -20,6 +20,14 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private int credit;
+    
+	public int getCredit() {
+		return credit;
+	}
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +52,15 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+	}
+	
+	public User(Long id, String firstName, String lastName, String email, int credit) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.credit = credit;
 	}
 	public User() {
 		
