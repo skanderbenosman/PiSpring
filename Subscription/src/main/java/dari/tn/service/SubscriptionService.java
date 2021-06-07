@@ -1,7 +1,10 @@
 package dari.tn.service;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +13,11 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,9 +35,11 @@ import dari.tn.model.Subscribe;
 public class SubscriptionService {
 	@Autowired  
 	SubscriptionRepository abonnementRepository;  
-    private EntityManager entityManager;
-    UtilisateurRepository utilisateurRepository;
+	UtilisateurRepository utilisateurRepository;
     SubscribeRepository subrep;
+    
+    public EntityManager entityManager;
+    
     
 	public List<Subscription> getAllSubscriptions()   
 	{  
@@ -76,30 +83,40 @@ public void updateSub(@PathVariable int id, @RequestBody Subscription sub) {
 			subscr.setSubscription_title(sub.getSubscription_title());
 			subscr.setSubscription_offer(sub.getSubscription_offer());
 			subscr.setSubscription_price(sub.getSubscription_price());
-
+			subscr.setSubscription_duration(sub.getSubscription_duration());
 	}
 	
 	
 }
 
-public Subscribe AddSubTo(int idS, Long long1, Date dateD, Date dateF) {
+public String AddSubTo(int idS, int long1, Date dateD, Date dateF) {
 
     Subscribe s = new Subscribe();
-    s.setDateD(new Date());
-    s.setDateF(new Date());
-	Utilisateur u = utilisateurRepository.findById(long1).get();
+    s.setDateD(dateD);
+    s.setDateF(dateF);
+    Optional<Subscription> su = abonnementRepository.findById(idS);
+    Optional<Utilisateur> u = utilisateurRepository.findById(long1);
+    if (u.isPresent() && su.isPresent()){
+	Subscription su1=su.get();
+	Utilisateur u1=u.get();
+ //   s.setUser(u1);
+//    s.setSubscription(su1);
+//    s.setPaid(true);
+ //   subrep.save(s);
+    System.out.println("test"+su1.getSubscription_id()+u1.getUser_id());
 
-    s.setUtilisateur(u);
-    Subscription su = abonnementRepository.findById(idS).get();
-    s.setSubscription(su);
-    s.setPaid(true);
-    return subrep.save(s);
+    }
+    
+    
+ //   
+   return "idS";
+   
 }
 
 
 public Subscribe EndAbo(int idS) {
     Subscribe subsc = subrep.findById(idS).orElse(null);
-    if(subsc.getDateF().compareTo(new Date())<0){
+    if(subsc.getDateF().compareTo(Calendar.getInstance().getTime())<0){
         subsc.setPaid(false);
     }
     return subsc ;
@@ -107,11 +124,12 @@ public Subscribe EndAbo(int idS) {
 
 @Transactional
 public void insertWithQuery(Subscribe sub) {
-    entityManager.createNativeQuery("INSERT INTO Subscribe (dated,datef,utilisateur_id,id_sub) VALUES (?,?,?,?)")
+    entityManager.createNativeQuery("INSERT INTO Subscribe (dated,datef,paid,utilisateur_id,id_sub) VALUES (?,?,?,?)")
             .setParameter(1, sub.getDateD())
             .setParameter(2, sub.getDateF())
-            .setParameter(3, sub.getUtilisateur().getUtilisateurId())
-            .setParameter(4,sub.getSubscription().getSubscription_id())
+            .setParameter(3, sub.isPaid())
+            .setParameter(4, sub.getUser().getUser_id())
+            .setParameter(5,sub.getSubscription().getSubscription_id())
             .executeUpdate();
 }
 
@@ -135,5 +153,24 @@ public Charge chargeNewCard(String token, double amount) throws Exception {
 
 public List<Subscription> Search(String word) {
 	return (List<Subscription>) abonnementRepository.searchEvent(word);
+}
+
+@GetMapping("/test/{idt}")
+public Utilisateur test (@PathVariable int idt){
+	Utilisateur u1 = null;
+	Optional<Utilisateur> u = utilisateurRepository.findById(idt);
+    if (u.isPresent()){
+	u1=u.get();
+//	Subscription su1=su.get();
+ //   s.setUser(u1);
+//    s.setSubscription(su1);
+//    s.setPaid(true);
+ //   subrep.save(s);
+    System.out.println("test"+u1.getUser_id());
+    return u1;
+
+    }
+    
+    return u1;
 }
 }

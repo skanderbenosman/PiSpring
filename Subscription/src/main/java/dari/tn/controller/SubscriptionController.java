@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,8 @@ import com.mysql.cj.Query;
 
 import dari.tn.model.Subscribe;
 import dari.tn.model.Subscription;
+import dari.tn.model.Utilisateur;
+import dari.tn.repository.UtilisateurRepository;
 import dari.tn.service.SubscriptionService;
 
 @RestController
@@ -52,7 +57,9 @@ import dari.tn.service.SubscriptionService;
 	public int subscription_id;
 	public String subscription_offer;
 	public String subscription_title;
+	public Date subscription_duration;
 	public int subscription_price;
+	UtilisateurRepository urep;
 	Connection connection;
 	private Map<String,Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();  
 	public List<Subscription> ListSubs=new ArrayList<Subscription>();
@@ -91,10 +98,16 @@ import dari.tn.service.SubscriptionService;
 		return subscription_offer;
 	}
 
+	public void setSubscription_duration(Date subscription_duration) {
+		this.subscription_duration = subscription_duration;
+	}
+	public Date getSubscription_duration() {
+		return subscription_duration;
+	}
+
 	public void setSubscription_offer(String subscription_offer) {
 		this.subscription_offer = subscription_offer;
 	}
-
 	public String getSubscription_title() {
 		return subscription_title;
 	}
@@ -124,6 +137,7 @@ import dari.tn.service.SubscriptionService;
 	{  
 	return abonnementService.getSubscriptionById(abonnement_id);  
 	}  
+
 	
 	@DeleteMapping("/delete/{abonnement_id}")  
 	public void deleteSubscritpion(@PathVariable("abonnement_id") int abonnement_id)   
@@ -146,11 +160,10 @@ import dari.tn.service.SubscriptionService;
 	return abonnement;  
 	}  
 	
-    @PostMapping("/addsubscribe")
-    @ResponseBody
-    public  String AddS(@RequestBody Subscribe s){
-        Subscribe su = abonnementService.AddSubTo(s.getSubscription().getSubscription_id(),s.getUtilisateur().getUtilisateurId(),s.getDateD(),s.getDateF());
-        return " ";
+    public  String AddS(@RequestBody int idS, int long1, Date dateD, Date dateF){
+    	 abonnementService.AddSubTo(idS,long1,dateD,dateF);
+    	return "/Subs.xhtml?faces-redirect=true";
+
     }
     
     @GetMapping("/End/{idS}")
@@ -158,13 +171,16 @@ import dari.tn.service.SubscriptionService;
         return abonnementService.EndAbo(idS);
     }
 	
+  
+    
+    
 	public String addSubscription()  {
 		
 		Subscription sub=new Subscription();
 		sub.setSubscription_title(subscription_title);
 		sub.setSubscription_price(subscription_price);
 		sub.setSubscription_offer(subscription_offer);
-	
+		sub.setSubscription_duration(subscription_duration);
 		
 		abonnementService.Add(sub);
 		return "/Subs.xhtml?faces-redirect=true";
@@ -203,11 +219,12 @@ import dari.tn.service.SubscriptionService;
 		try{  
 		connection = getConnection();    
 		PreparedStatement stmt=connection.prepareStatement(  
-		"update Subscription set subscription_offer=?,subscription_price=?,subscription_title=? where subscription_id=?");    
+		"update Subscription set subscription_offer=?,subscription_price=?,subscription_title=?,subscription_duration=? where subscription_id=?");    
 		stmt.setString(1,sub.getSubscription_offer());    
 		stmt.setInt(2,sub.getSubscription_price());    
-		stmt.setString(3,sub.getSubscription_title());       
-		stmt.setInt(4,sub.getSubscription_id());    
+		stmt.setString(3,sub.getSubscription_title());
+		stmt.setDate(4,sub.getSubscription_duration());
+		stmt.setInt(5,sub.getSubscription_id());    
 		stmt.executeUpdate();  
 		connection.close();  
 		}catch(Exception e){  

@@ -1,6 +1,7 @@
 package dari.tn.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 
 @Entity  
@@ -28,17 +31,44 @@ private String subscription_offer;
 @Column
 private String subscription_title;
 @Column
+private Date subscription_duration;  
+@Column
 private int subscription_price;
 public Subscription() {
 }
 
 
-public Subscription(String subscription_offer, String subscription_title, int subscription_price) {
+
+
+public Subscription(int subscription_id, String subscription_offer, String subscription_title,
+		Date subscription_duration, int subscription_price, List<Subscribe> subscribes) {
 	super();
+	this.subscription_id = subscription_id;
 	this.subscription_offer = subscription_offer;
 	this.subscription_title = subscription_title;
+	this.subscription_duration = subscription_duration;
 	this.subscription_price = subscription_price;
+	this.subscribes = subscribes;
 }
+
+
+
+
+public java.sql.Date getSubscription_duration() {
+	return subscription_duration;
+}
+public void setSubscription_duration(Date subscription_duration) {
+	this.subscription_duration = subscription_duration;
+}
+public List<Subscribe> getSubscribes() {
+	return subscribes;
+}
+public void setSubscribes(List<Subscribe> subscribes) {
+	this.subscribes = subscribes;
+}
+
+
+
 
 @OneToMany(mappedBy = "subscription")
 private List<Subscribe> subscribes ;

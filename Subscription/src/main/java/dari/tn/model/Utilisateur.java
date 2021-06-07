@@ -1,122 +1,64 @@
 package dari.tn.model;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+@Entity  
+@Table(name = "Utilisateur")
+public class Utilisateur implements Serializable{
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public  class Utilisateur implements Serializable {
-
-    /**
+/**
 	 * 
 	 */
-	public static final long serialVersionUID = 537136081490133106L;
+	private static final long serialVersionUID = -9053198679814003794L;
+@Id
+@GeneratedValue (strategy = GenerationType.AUTO)
+private int user_id;
+@Column
+private String name;
+@Column
+private int credit;
+public int getUser_id() {
+	return user_id;
+}
+public void setUser_id(int user_id) {
+	this.user_id = user_id;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public int getCredit() {
+	return credit;
+}
+public void setCredit(int credit) {
+	this.credit = credit;
+}
+public Utilisateur(int user_id, String name, int credit) {
+	super();
+	this.user_id = user_id;
+	this.name = name;
+	this.credit = credit;
+}
+public Utilisateur() {
+	super();
+}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long utilisateurId;
 
-	public String lastName;
-    public String firstName;
-    public String password;
-    public String phone;
-    public Region Region;
-    public String email;
-    public Instant created;
-    public boolean subscribed;
-    public SubType SubscriptionType;
-	public Long getUtilisateurId() {
-		return utilisateurId;
-	}
-	public void setUtilisateurId(Long utilisateurId) {
-		this.utilisateurId = utilisateurId;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public Region getRegion() {
-		return Region;
-	}
-	public void setRegion(Region region) {
-		Region = region;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Instant getCreated() {
-		return created;
-	}
-	public void setCreated(Instant created) {
-		this.created = created;
-	}
-	public boolean isSubscribed() {
-		return subscribed;
-	}
-	public void setSubscribed(boolean subscribed) {
-		this.subscribed = subscribed;
-	}
-	public SubType getSubscriptionType() {
-		return SubscriptionType;
-	}
-	public void setSubscriptionType(SubType subscriptionType) {
-		SubscriptionType = subscriptionType;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public Utilisateur(Long utilisateurId, String lastName, String firstName, String password, String phone,
-			dari.tn.model.Region region, String email, Instant created, boolean subscribed, SubType subscriptionType) {
-		super();
-		this.utilisateurId = utilisateurId;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.password = password;
-		this.phone = phone;
-		Region = region;
-		this.email = email;
-		this.created = created;
-		this.subscribed = subscribed;
-		SubscriptionType = subscriptionType;
-	}
-	public Utilisateur() {
-		super();
-	}
 
 
 }

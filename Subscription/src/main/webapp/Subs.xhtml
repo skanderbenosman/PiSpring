@@ -45,11 +45,16 @@ color: white;
 <h:outputText value="#{subs.subscription_offer}" /></h:column>
 <h:column><f:facet name="header"><h:outputText value="price" /></f:facet>
 <h:outputText value="#{subs.subscription_price}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="duration" /></f:facet>
+<h:outputText value="#{subs.subscription_duration}" /></h:column>
 <h:column>
-<f:facet name="header"><h:outputText value="Supprimer" /></f:facet>
-<h:commandButton action="#{subscriptionController.deleteSubscritpion(subs.subscription_id)}"
+<f:facet name="header"><h:outputText value="Subscribe" /></f:facet>
+<h:commandButton  action="#{subscriptionController.AddS(1,1,subs.subscription_duration,subs.subscription_duration)}"
 value="Subscribe" />
+
+
 </h:column>
+
 
      
 </h:dataTable>
