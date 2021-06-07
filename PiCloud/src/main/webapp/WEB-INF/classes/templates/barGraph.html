@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="http://localhost:8084/SpringMVC/">Dari.tn</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+       <a class="nav-link" href="http://localhost:8084/SpringMVC/pages/admin/AjouterContrat.jsf?faces-redirect=true">Ajout Purchase</a>
+        
+        
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:8084/SpringMVC/pages/admin/gestionPurchase.jsf?faces-redirect=true">Ajout</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          simulation de credit
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AjoutBank.jsf">Ajout Bank</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AfficheBank.jsf">Affiche Bank</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AjouterLoan.jsf">Ajouter Loan</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AfficheLoan.jsf">Affiche Loan</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          gestion d'achat
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AjouterContrat.jsf">Ajouter contrat</a>
+         <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AfficheContrat.jsf">consulte contrat</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AjouterPurchase.jsf">Achete produit</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AffichePurchase.jsf">consulte les achats</a>
+          <a class="dropdown-item" href="http://localhost:8084/SpringMVC/servlet/displayBarGraph">statistics</a>       
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          gestion d'advertisement
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/AddAds.jsf">Ajouter ADV</a>
+         <a class="dropdown-item" href="http://localhost:8084/SpringMVC/pages/admin/Ads.jsf">consulte ADV</a>
+
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/SpringMVC/servlet/displayBarGraph">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> </input>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+	<div class="container">
+		<h2 align="center">Technology Line Graph</h2>
+
+		<div id="container"
+			style="width: 550px; height: 400px; margin: 0 auto"></div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script th:inline="javascript">
+    $(function(){
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'List des Achats '
+        },
+        subtitle: {
+            text: 'Contrat'
+        },
+        xAxis: {
+            categories: [[${surveyMap.keySet()}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:100,
+            title: {
+                text: 'Prix des achats'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Prix',
+            data: [[${surveyMap.values()}]]
+        }]
+    });
+    });
+</script>
+
+</body>
+</html>
