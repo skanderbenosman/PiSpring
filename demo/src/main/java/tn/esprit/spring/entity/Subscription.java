@@ -53,7 +53,7 @@ public Subscription(int subscription_id, String subscription_offer, String subsc
 
 
 
-public java.sql.Date getSubscription_duration() {
+public Date getSubscription_duration() {
 	return subscription_duration;
 }
 public void setSubscription_duration(Date subscription_duration) {

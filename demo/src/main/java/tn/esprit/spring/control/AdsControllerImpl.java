@@ -51,7 +51,8 @@ import tn.esprit.spring.service.AdvertisementServiceImp;
 
 @Controller(value = "AdsController") // Name of the bean in Spring IoC
 @ELBeanName(value = "AdsController") // Name of the bean used by JSF
-@Join(path = "/", to = "/Ads.jsf")
+@Join(path = "/", to = "/login.jsf")
+
 @MultipartConfig
 @RequestScoped
 public class AdsControllerImpl   {
