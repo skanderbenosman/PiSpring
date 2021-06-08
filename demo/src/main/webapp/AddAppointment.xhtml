@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Template/template.xhtml">
+	<ui:define name="Appointment">
+		<h:head>
+			<title>Add Appointment - DARI</title>
+			<link
+				href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+				rel="stylesheet" id="bootstrap-css"></link>
+			<script
+				src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+			<script
+				src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+			<link
+				href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+				rel="stylesheet" id="bootstrap-css"></link>
+			<script
+				src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+			<script
+				src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+			<link rel="stylesheet"
+				href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			</link>
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script
+				src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		</h:head>
+
+		<h:body>
+			<div class="container bootstrap snippet">
+				<div class="row">
+					<div class="col-sm-10">
+						<h1>#{loginController.userDetails.username}  Appointments </h1>
+					</div>
+					<div class="col-sm-2">
+						<a href="/users" class="pull-right"> <img
+							title="profile image" class="img-circle img-responsive"
+							src="https://cdn2.iconfinder.com/data/icons/business-dual-color-glyph-set-4/128/LINKEDIN_PROFILE-512.png"></img>
+						</a>
+					</div>
+				</div>
+				<div class="container bootstrap snippet">
+					<div class="row">
+						<div class="col-md-12 ftco-animate">
+							<div class="cart-list">
+								<table class="table">
+									<thead class="thead-primary">
+										<tr class="text-center">
+											<th>description</th>
+											<th>appointmentdate</th>
+											<th>beginhour</th>
+											<th>endhour</th>
+											<th>Status</th>
+											<th>appointmentType</th>
+										</tr>
+									</thead>
+									<tbody>
+										<h:form id="account">
+											<ui:repeat var="app"
+												value="#{appController.FindAppointmentsByUser()}">
+
+												<tr class="text-center">
+
+													<td class="description"><h:outputText
+															value="#{app.description}" /></td>
+													<td class="date"><h:outputText value="#{app.date}" /></td>
+													<td class="beginhour"><h:outputText
+															value="#{app.beginhour}" /></td>
+													<td class="endhour"><h:outputText
+															value="#{app.endhour}" /></td>
+													<td class="Status">
+													<h:outputText value="#{app.status}" />
+													
+													</td>
+													<td class="appointmentType"><h:outputText
+															value="#{app.appointmentType}" /></td>
+													<td>
+														<div class="form-group">
+															<div class="col-xs-12">
+																<h:commandButton id="btn" class="btn btn-lg"
+																	title="Display" value="Display"
+																	action="#{appController.displayAppointment(app)}" />
+															</div>
+														</div>
+
+													</td>
+
+
+												</tr>
+											</ui:repeat>
+										</h:form>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<div class="tab-content">
+							<div class="tab-pane active" id="home">
+								<h:form id="form1" class="form">
+									<div class="form-group">
+
+										<div class="col-xs-6">
+											<label for="first_name"><h4>Description</h4></label>
+											<h:inputText type="text" class="form-control"
+												name="description" id="Description"
+												p:placeholder="Description"
+												value="#{appController.description}" />
+										</div>
+									</div>
+
+									<div class="form-group">
+
+										<div class="col-xs-6">
+											<label for="first_name"><h4>Beginhour</h4></label>
+											<h:inputText type="text" class="form-control"
+												name="beginhour" id="Beginhour" p:placeholder="Beginhour"
+												value="#{appController.beginhour}" />
+										</div>
+									</div>
+									<div class="form-group">
+
+										<div class="col-xs-6">
+											<label for="first_name"><h4>Endhour</h4></label>
+											<h:inputText type="text" class="form-control" name="endhour"
+												id="Endhour" p:placeholder="Endhour"
+												value="#{appController.endhour}" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-xs-6">
+											<label for="first_name"><h4>Type Appointment</h4></label>
+
+											<h:selectOneMenu value="#{appController.appointmentType}"
+												p:placeholder="Choisir Type" class="col-xs-6">
+												<f:selectItem itemLabel="Choose type" itemValue="#{null}" />
+												<f:selectItems value="#{appController.appointmentTypes}" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-xs-6">
+											<label for="mobile"><h4>date Appointment</h4></label>
+											<h:inputText value="#{appController.appointmentdate}"
+												p:placeholder="dd-mm-yyyy" styleClass="form-control">
+												<f:convertDateTime pattern="dd-mm-yyyy" />
+											</h:inputText>
+
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-xs-12">
+											<br> <h:commandButton class="btn btn-lg"
+													title="ADD" value="Ajouter"
+													action="#{appController.ajouterAgentrendezVous()}" />
+													
+													 <h:commandButton
+													 class="btn btn-lg" title="Update" value="Update"
+													action="#{appController.update_appointment_By_User()}" /> 
+											</br>
+										</div>
+									</div>
+									
+						
+								</h:form>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>

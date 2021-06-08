@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/TemplateAdmin/template.xhtml">
+	<ui:define name="AfficherAppoitment">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Tables - Appoitment</title>
+		<h:head>
+			<meta name="description" content="Static &amp; Dynamic Tables" />
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+			<!-- bootstrap & fontawesome -->
+			<link rel="stylesheet" href="../dash/css/bootstrap.min.css" />
+			<link rel="stylesheet"
+				href="../dash/font-awesome/4.5.0/css/font-awesome.min.css" />
+			<link
+				href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+				rel="stylesheet" />
+			<!-- page specific plugin styles -->
+
+			<!-- text fonts -->
+			<link rel="stylesheet" href="../dash/css/fonts.googleapis.com.css" />
+
+			<!-- ace styles -->
+			<link rel="stylesheet" href="../dash/css/ace.min.css"
+				class="ace-main-stylesheet" id="main-ace-style" />
+
+			<link rel="stylesheet" href="../dash/css/ace-skins.min.css" />
+			<link rel="stylesheet" href="../dash/css/ace-rtl.min.css" />
+
+
+			<script src="../dash/js/ace-extra.min.js"></script>
+
+		</h:head>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h3 class="header smaller lighter blue">Appoitments table</h3>
+
+				<div class="clearfix">
+					<div class="pull-right tableTools-container"></div>
+				</div>
+				<div class="table-header">Appoitments</div>
+
+				<div>
+					<table id="dynamic-table"
+						class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th class="hidden-480">Appoitment description</th>
+								<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+									Appointment type</th>
+								<th>Appointment Date</th>
+								<th>Beginhour</th>
+								<th>Endhour</th>
+								<th>Status</th>
+								<th>User_Name</th>
+								<th>Delete</th>
+								<th>Update</th>
+							</tr>
+						</thead>
+
+
+						<ui:repeat var="appoit"
+							value="#{appController.getAllAppointment()}" varStatus="status">
+
+							<tr>
+
+								<td class="hidden-480"><h:outputText value="#{appoit.id}" /></td>
+								<td class="hidden-480"><h:outputText
+										value="#{appoit.description}" /></td>
+								<td class="hidden-480"><span
+									class="label label-sm label-warning"><h:outputText
+											value="#{appoit.appointmentType}" /></span></td>
+								<td class="hidden-480"><h:outputText value="#{appoit.date}" /></td>
+								<td class="hidden-480"><h:outputText
+										value="#{appoit.beginhour}" /></td>
+								<td class="hidden-480"><h:outputText
+										value="#{appoit.endhour}" /></td>
+								<td class="hidden-480"><h:outputText
+										value="#{appoit.status}" /></td>
+								<td class="hidden-480"><h:outputText
+										value="#{appoit.user.firstName}" /></td>
+
+
+								<td><h:column>
+										<h:form>
+											<h:commandLink id="btnsupp" value="Delete"
+												action="#{appController.delete_appointment(appoit.id)}">
+
+												<i class="ace-icon fa fa-trash-o bigger-120 white"></i>
+											</h:commandLink>
+										</h:form>
+
+
+									</h:column></td>
+								<td><h:column>
+										<h:form>
+											<h:commandLink id="btnsupp" value="Accepter"
+												action="#{appController.accepte_appointment(appoit.id)}">
+
+												<i class="ace-icon fa fa-trash-o bigger-120 white"></i>
+											</h:commandLink>
+										</h:form>
+
+
+									</h:column></td>
+
+
+							</tr>
+						</ui:repeat>
+
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="../dash/js/jquery-2.1.4.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<script src="../dash/js/bootstrap.min.js"></script>
+		<script src="../dash/js/nvtableau.js"></script>
+		<!-- page specific plugin scripts -->
+		<script src="../dash/js/jquery.dataTables.min.js"></script>
+		<script src="../dash/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="../dash/js/dataTables.buttons.min.js"></script>
+		<script src="../dash/js/buttons.flash.min.js"></script>
+		<script src="../dash/js/buttons.html5.min.js"></script>
+		<script src="../dash/js/buttons.print.min.js"></script>
+		<script src="../dash/js/buttons.colVis.min.js"></script>
+		<script src="../dash/js/dataTables.select.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="../dash/js/ace-elements.min.js"></script>
+		<script src="../dash/js/ace.min.js"></script>
+	</ui:define>
+</ui:composition>
