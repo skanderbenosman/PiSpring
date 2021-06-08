@@ -264,7 +264,7 @@ import tn.esprit.spring.service.SubscriptionService;
     public String chargeCard(HttpServletRequest request) throws Exception {
         String token = request.getParameter("stripeToken");
         Double amount = Double.parseDouble(request.getParameter("amount"));
-        abonnementService.chargeNewCard(token, amount);
+       // abonnementService.chargeNewCard(token, amount);
         return "result";
     }
 

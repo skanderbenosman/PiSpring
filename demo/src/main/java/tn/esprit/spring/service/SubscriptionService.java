@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.stripe.Stripe;
-import com.stripe.model.Charge;
+
 
 import tn.esprit.spring.entity.Subscribe;
 import tn.esprit.spring.entity.Subscription;
@@ -140,17 +139,17 @@ private String API_SECRET_KEY;
 
 @Autowired
 public void SubscriptionRepository() {
-    Stripe.apiKey = API_SECRET_KEY;
+   // Stripe.apiKey = API_SECRET_KEY;
 }
 
-public Charge chargeNewCard(String token, double amount) throws Exception {
-    Map<String, Object> chargeParams = new HashMap<>();
-    chargeParams.put("amount", (int)(amount * 100));
-    chargeParams.put("currency", "USD");
-    chargeParams.put("source", token);
-    Charge charge = Charge.create(chargeParams);
-    return charge;
-}
+//public Charge chargeNewCard(String token, double amount) throws Exception {
+  //  Map<String, Object> chargeParams = new HashMap<>();
+    //chargeParams.put("amount", (int)(amount * 100));
+   // chargeParams.put("currency", "USD");
+    //chargeParams.put("source", token);
+    //Charge charge = Charge.create(chargeParams);
+    //return charge;
+//}
 
 
 public List<Subscription> Search(String word) {
