@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.controlJSF.UserControllerImpl;
 import tn.esprit.spring.entity.Advertisement;
 import tn.esprit.spring.entity.Contrat;
 import tn.esprit.spring.entity.Purchase;
 import tn.esprit.spring.service.IContratService;
 import tn.esprit.spring.service.IPurchaseService;
+import tn.esprit.spring.service.SimpleEmailExampleController;
 
 @RestController
 @RequestMapping("/Purchase")

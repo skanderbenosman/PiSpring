@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.controlJSF.UserControllerImpl;
+import tn.esprit.spring.control.UserControllerImpl;
 import tn.esprit.spring.entity.Advertisement;
 import tn.esprit.spring.entity.Contrat;
 import tn.esprit.spring.entity.Purchase;

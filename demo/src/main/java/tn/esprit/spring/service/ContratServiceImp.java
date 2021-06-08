@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tn.esprit.spring.controller.ContratRestControlImp;
+import tn.esprit.spring.control.ContratRestControlImp;
 import tn.esprit.spring.entity.Advertisement;
 import tn.esprit.spring.entity.Bank;
 import tn.esprit.spring.entity.Contrat;

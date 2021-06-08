@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import tn.esprit.spring.controller.BankRestControlImp;
 import tn.esprit.spring.entity.Bank;
 import tn.esprit.spring.entity.Contrat;
 import tn.esprit.spring.entity.Role;

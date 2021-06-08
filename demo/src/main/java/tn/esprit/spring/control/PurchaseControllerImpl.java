@@ -16,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import tn.esprit.spring.controller.ContratRestControlImp;
-import tn.esprit.spring.controller.PurchaseRestControlImp;
-import tn.esprit.spring.controller.SimpleEmailExampleController;
+
 import tn.esprit.spring.entity.Contrat;
 import tn.esprit.spring.entity.Purchase;
 import tn.esprit.spring.entity.User;
@@ -26,8 +24,7 @@ import tn.esprit.spring.service.BankServiceImp;
 import tn.esprit.spring.service.ContratServiceImp;
 import tn.esprit.spring.service.IPurchaseService;
 import tn.esprit.spring.service.PurchaseServiceImp;
-import tn.esprit.spring.service.UserSerivce;
-import tn.esprit.spring.service.UserServiceImpl;
+
 
 @Scope(value = "session")
 @Controller(value = "purchaseController")

@@ -99,7 +99,7 @@ public String AddSubTo(int idS, Long long1,Date dateD,Date dateF) {
 	Subscription su1=su.get();
 	User u1=u.get();
    s.setUser(u1);
-   u1.setCredit(u1.getCredit() - su1.getSubscription_price());
+   u1.setSolde(u1.getSolde() - su1.getSubscription_price());
    s.setSubscription(su1);
  s.setPaid(true);
    subrep.save(s);

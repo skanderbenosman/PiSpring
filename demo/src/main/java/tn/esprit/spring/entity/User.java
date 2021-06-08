@@ -78,7 +78,9 @@ public class User implements Serializable {
 
 	@Column(name = "enabled")
 	private boolean enabled = false;
-
+	
+	
+	
 	@Enumerated(EnumType.STRING)
 	private AuthProvider provider;
 	private String photoPath;
@@ -184,6 +186,15 @@ public class User implements Serializable {
 		this.email = email;
 		this.password = password;
 	}
+
+	public User(Long id,String username, String email, String password) {
+		super();
+		this.id=id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
 
 	public String getTel() {
 		return tel;
@@ -364,6 +375,15 @@ public class User implements Serializable {
 
 
 
+
+	public User(Long id, String firstName, String lastName, String email, float solde) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.solde = solde;
+	}
 
 	public LocalDate getSignupDay() {
 		return signupDay;

@@ -15,15 +15,14 @@ import org.springframework.stereotype.Component;
 
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
-import tn.esprit.spring.service.UserSerivce;
-
+import tn.esprit.spring.service.*;
 @Scope(value = "session")
 @Controller(value = "userController") // Name of the bean in Spring IoC
 @ELBeanName(value = "userController") // Name of the bean used by JSF
 @Join(path = "/", to = "/login.jsf")
 public class UserControllerImpl {
 	@Autowired
-	UserSerivce userService;
+	UserService userService;
 
 	private String login; private String password; private User user; private static User authenticatedUser ;
 	private String firstName; private String lastName; private String email;
@@ -170,7 +169,7 @@ public class UserControllerImpl {
 	}
 	    return navigateTo;}
 	public List<User> getEmployes() {
-		employes = userService.retrieveAllUsers();
+		employes = userService.getAllUsers();
 		return employes;
 	}
 	public void removeEmploye(int employeId)
