@@ -103,24 +103,25 @@ public class UserControllerImpl {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public String doLogin() {
-		String navigateTo = "null";
-		authenticatedUser= userService.authenticate(login , password);
-		if (authenticatedUser != null && authenticatedUser.getRole()==Role.ADMINISTRATEUR ) 
-		{    
-		      User t=this.authenticatedUser;
-		      System.err.println("*********"+t);
-			navigateTo = "/pages/admin/dashboard.xhtml?faces-redirect=true";
-			loggedIn = true; }
-		else {
-			FacesMessage facesMessage =
+	
+//	public String doLogin() {
+//		String navigateTo = "null";
+//		authenticatedUser= userService.authenticate(login , password);
+//		if (authenticatedUser != null && authenticatedUser.getRoles()==Role.ADMINISTRATEUR ) 
+//		{    
+//		      User t=this.authenticatedUser;
+//		      System.err.println("*********"+t);
+//			navigateTo = "/pages/admin/dashboard.xhtml?faces-redirect=true";
+//			loggedIn = true; }
+//		else {
+//			FacesMessage facesMessage =
 
-					new FacesMessage("Login Failed: please check your username/password and try again.");
+//					new FacesMessage("Login Failed: please check your username/password and try again.");
 
-			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
-		}
-		return navigateTo;
-	}
+//			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
+//		}
+//		return navigateTo;
+//	}
 
 	public String doLogout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -161,13 +162,13 @@ public class UserControllerImpl {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/pages/admin/Ads.xhtml?faces-redirect=true";}
 	
-	public Role[] getRoles() { return Role.values(); }
-	public String addEmploye() {
-		String navigateTo ="null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml";
-		else {userService.addOrUpdateEmploye(new User(email, actif,password,firstName,lastName,role));
-	}
-	    return navigateTo;}
+//	public Role[] getRoles() { return Role.values(); }
+//	public String addEmploye() {
+//		String navigateTo ="null";
+//		if (authenticatedUser==null || !loggedIn) return "/login.xhtml";
+//		else {userService.addOrUpdateEmploye(new User(email, actif,password,firstName,lastName,role));
+//	}
+//	    return navigateTo;}
 	public List<User> getEmployes() {
 		employes = userService.getAllUsers();
 		return employes;
@@ -176,21 +177,21 @@ public class UserControllerImpl {
 	{
 		userService.deleteUser(employeId);
 	}
-	public void displayEmploye(User empl)
-	{
-		this.setFirstName(empl.getFirstName());
-		this.setLastName(empl.getLastName());
-		this.setActif(empl.isActif());
-		this.setEmail(empl.getEmail());
-		this.setRole(empl.getRole());
-		this.setPassword(empl.getPassword());
-		this.setEmployeIdToBeUpdated(empl.getId().intValue());
-	}
-	public void updateEmploye()
-	{ Long id=Long.valueOf(employeIdToBeUpdated);
+//	public void displayEmploye(User empl)
+//	{
+//		this.setFirstName(empl.getFirstName());
+//		this.setLastName(empl.getLastName());
+//		this.setActif(empl.isActif());
+//		this.setEmail(empl.getEmail());
+//		this.setRole(empl.getRoles());
+//		this.setPassword(empl.getPassword());
+//		this.setEmployeIdToBeUpdated(empl.getId().intValue());
+//	}
+//	public void updateEmploye()
+//	{ Long id=Long.valueOf(employeIdToBeUpdated);
 
-	userService.addOrUpdateEmploye(new User(id,email, actif,password,
-			firstName,lastName ,role)); }
+//	userService.addOrUpdateEmploye(new User(id,email, actif,password,
+//			firstName,lastName ,role)); }
 	public static User getT() {
 	
 		return authenticatedUser;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller(value = "acceuilController")
 @ELBeanName(value = "acceuilController")
-@Join(path = "/", to = "/acceuil.jsf")
+@Join(path = "/", to = "/login.jsf")
 public class AcceuilController {
 
 }

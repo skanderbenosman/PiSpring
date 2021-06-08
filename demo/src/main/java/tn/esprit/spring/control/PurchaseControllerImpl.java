@@ -24,6 +24,7 @@ import tn.esprit.spring.service.BankServiceImp;
 import tn.esprit.spring.service.ContratServiceImp;
 import tn.esprit.spring.service.IPurchaseService;
 import tn.esprit.spring.service.PurchaseServiceImp;
+import tn.esprit.spring.service.UserService;
 
 
 @Scope(value = "session")
@@ -95,8 +96,8 @@ public class PurchaseControllerImpl {
 	@Autowired
 	ContratServiceImp bs;
 	@Autowired
-	UserServiceImpl us;
-	UserSerivce userService;
+	UserService userService;
+	@Autowired
 	UserControllerImpl uss;
 	@Autowired
 	SimpleEmailExampleController tmail;

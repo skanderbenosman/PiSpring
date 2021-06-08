@@ -152,7 +152,7 @@ public class ContratControllerImp {
 		  String d3 = sdf.format(cal3.getTime()); 
 		  System.out.println("Date avant l'addition: "+d3);
 		  System.out.println("Date après l'addition: "+d2);
-		   this.advertisement=bs.getAdvById(this.selectedadsid);
+	//	   this.advertisement=bs.getById(this.selectedadsid);
 		 System.err.println("*********"+this.advertisement.getAddress());
 		if(tmail1.CountContrat()>=1){
 			FacesMessage facesMessage =

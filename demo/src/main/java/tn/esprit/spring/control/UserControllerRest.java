@@ -17,11 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nexmo.client.NexmoClient;
-import com.nexmo.client.NexmoClientException;
-import com.nexmo.client.sms.MessageStatus;
-import com.nexmo.client.sms.SmsSubmissionResponse;
-import com.nexmo.client.sms.messages.TextMessage;
+
 
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
@@ -85,26 +81,30 @@ public class UserControllerRest {
 
         return(user);
     }
-	@PostMapping("/register")///{idrole}dans l'url et , @PathVariable(name="idrole") int idrole dans la modif 
-    public User register(@RequestBody() User user ) throws IOException, NexmoClientException {
+//	@PostMapping("/register")///{idrole}dans l'url et , @PathVariable(name="idrole") int idrole dans la modif 
+//    public User register(@RequestBody() User user ) throws IOException, NexmoClientException {
 		
 //	 Role ro=role.findById(idrole).orElse(null);
 	//user.getRole().add(ro);
         //return userrep.saveUser(user);
 		//VonageClient client = VonageClient.builder().apiKey("3b7b3f72").apiSecret("0CeMpvWzyCmrBdW1").build();
-       NexmoClient  client = NexmoClient .builder().apiKey("3b7b3f72").apiSecret("0CeMpvWzyCmrBdW1").build();
-      TextMessage message = new TextMessage("Vonage APIs",
-               "21655490846",
-               "un nouveau compte utilisateur a ete creer"
-        );
-      SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
-       if (response.getMessages().get(0).getStatus() == MessageStatus.OK) {
-           System.out.println("Message sent successfully.");
-       } else {
-            System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
-        }
-		  return userrep.save(user);
-    }
+    //   NexmoClient  client = NexmoClient .builder().apiKey("3b7b3f72").apiSecret("0CeMpvWzyCmrBdW1").build();
+    //  TextMessage message = new TextMessage("Vonage APIs",
+      //         "21655490846",
+     //          "un nouveau compte utilisateur a ete creer"
+    //    );
+   //   SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
+     //  if (response.getMessages().get(0).getStatus() == MessageStatus.OK) {
+      //     System.out.println("Message sent successfully.");
+    //   } else {
+  //          System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
+//       }
+//		  return userrep.save(user);
+ //   }
+       
+       
+       
+       
 //	@PutMapping(value = "/affecter/{iduser}/{idRole}") 
 //    public void affecter(@PathVariable("iduser")int iduser,@PathVariable("idRole") int idRole) {
 //		 Role ro=role.findById(idRole).orElse(null);

@@ -1,7 +1,7 @@
 package org.o7planning.sbmail;
 
-import tn.esprit.spring.controlJSF.UserControllerImpl;
-import tn.esprit.spring.service.UserSerivce;
+import tn.esprit.spring.control.UserControllerImpl;
+import tn.esprit.spring.service.UserService;
 
 public class MyConstants {
 	public static final String MY_EMAIL = "mohamedmselmi407@gmail.com";

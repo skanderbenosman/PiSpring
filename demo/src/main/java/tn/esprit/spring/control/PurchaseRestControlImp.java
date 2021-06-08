@@ -19,7 +19,7 @@ import tn.esprit.spring.entity.Contrat;
 import tn.esprit.spring.entity.Purchase;
 import tn.esprit.spring.service.IContratService;
 import tn.esprit.spring.service.IPurchaseService;
-import tn.esprit.spring.service.SimpleEmailExampleController;
+import tn.esprit.spring.control.SimpleEmailExampleController;
 
 @RestController
 @RequestMapping("/Purchase")

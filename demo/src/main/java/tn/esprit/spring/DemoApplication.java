@@ -26,12 +26,12 @@ public class DemoApplication extends WebMvcConfigurerAdapter {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	@Bean
-	public ServletRegistrationBean servletRegistrationBean() {
+	public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
 	FacesServlet servlet = new FacesServlet();
-	return new ServletRegistrationBean(servlet, "*.jsf"); }
+	return new ServletRegistrationBean<FacesServlet>(servlet, "*.jsf"); }
 	@Bean
-	public FilterRegistrationBean rewriteFilter() {
-	FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
+	public FilterRegistrationBean<RewriteFilter> rewriteFilter() {
+	FilterRegistrationBean<RewriteFilter> rwFilter = new FilterRegistrationBean(new RewriteFilter());
 	rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
 	DispatcherType.ASYNC, DispatcherType.ERROR));
 	rwFilter.addUrlPatterns("/*");
