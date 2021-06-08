@@ -50,7 +50,7 @@ color: white;
 <h:outputText value="#{subs.subscription_duration}" /></h:column>
 <h:column>
 <f:facet name="header"><h:outputText value="Subscribe" /></f:facet>
-<h:commandButton  action="#{subscriptionController.AddS(1,1,subs.subscription_duration,subs.subscription_duration)}"
+<h:commandButton  action="#{subscriptionController.AddS(subs.subscription_id,1,subs.subscription_duration,subs.subscription_duration)}"
 value="Subscribe" />
 
 

@@ -12,11 +12,11 @@ import tn.esprit.spring.entity.User;
 
 @Repository
 
-public interface UtilisateurRepository extends CrudRepository<User, Integer>  
+public interface UserRepository extends CrudRepository<User, Long>  
 {
 
 
-	public Optional<User> findById(int id);
+	public Optional<User> findById(Long id);
 
 	
 

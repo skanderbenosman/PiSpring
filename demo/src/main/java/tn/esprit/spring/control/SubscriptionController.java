@@ -42,7 +42,7 @@ import com.mysql.cj.Query;
 
 import tn.esprit.spring.entity.Subscribe;
 import tn.esprit.spring.entity.Subscription;
-import tn.esprit.spring.repository.UtilisateurRepository;
+import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.service.SubscriptionService;
 
 
@@ -58,7 +58,7 @@ import tn.esprit.spring.service.SubscriptionService;
 	public String subscription_title;
 	public Date subscription_duration;
 	public int subscription_price;
-	UtilisateurRepository urep;
+	UserRepository urep;
 	Connection connection;
 	private Map<String,Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();  
 	public List<Subscription> ListSubs=new ArrayList<Subscription>();
@@ -159,8 +159,9 @@ import tn.esprit.spring.service.SubscriptionService;
 	return abonnement;  
 	}  
 	
-    public  String AddS(@RequestBody int idS, int long1, Date dateD, Date dateF){
-    	 abonnementService.AddSubTo(idS,long1,dateD,dateF);
+    public  String AddS(@RequestBody int idS, Long long1, Date dateD, Date dateF){
+    	  abonnementService.AddSubTo(idS,long1,dateD,dateF);
+    	 
     	return "/Subs.xhtml?faces-redirect=true";
 
     }

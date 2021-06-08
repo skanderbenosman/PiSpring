@@ -33,7 +33,9 @@ import tn.esprit.spring.repository.*;
 public class SubscriptionService {
 	@Autowired  
 	SubscriptionRepository abonnementRepository;  
-	UtilisateurRepository utilisateurRepository;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
     SubscribeRepository subrep;
     
     public EntityManager entityManager;
@@ -87,20 +89,22 @@ public void updateSub(@PathVariable int id, @RequestBody Subscription sub) {
 	
 }
 
-public String AddSubTo(int idS, int long1,Date dateD,Date dateF) {
+public String AddSubTo(int idS, Long long1,Date dateD,Date dateF) {
 
     Subscribe s = new Subscribe();
     s.setDateD(dateD);
     s.setDateF(dateF);
     Optional<Subscription> su = abonnementRepository.findById(idS);
-    Optional<User> u = utilisateurRepository.findById(long1);
+    Optional<User> u = userRepository.findById(long1);
     if (u.isPresent() && su.isPresent()){
 	Subscription su1=su.get();
 	User u1=u.get();
- //   s.setUser(u1);
-//    s.setSubscription(su1);
-//    s.setPaid(true);
- //   subrep.save(s);
+   s.setUser(u1);
+   u1.setCredit(u1.getCredit() - su1.getSubscription_price());
+   s.setSubscription(su1);
+ s.setPaid(true);
+   subrep.save(s);
+   userRepository.save(u1);
     System.out.println("test"+su1.getSubscription_id()+u1.getId());
 
     }
@@ -154,9 +158,9 @@ public List<Subscription> Search(String word) {
 }
 
 @GetMapping("/test/{idt}")
-public User test (@PathVariable int idt){
+public User test (@PathVariable Long idt){
 	User u1 = null;
-	Optional<User> u = utilisateurRepository.findById(idt);
+	Optional<User> u = userRepository.findById(idt);
     if (u.isPresent()){
 	u1=u.get();
 //	Subscription su1=su.get();

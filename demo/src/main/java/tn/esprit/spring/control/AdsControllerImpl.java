@@ -491,7 +491,7 @@ return navigateTo;
 		public String barGraph(Model model) {
 			List<Advertisement> List= new ArrayList<Advertisement>();
 			long b=1;
-			User u1=new User(b,"Mohamed skander","Ben osman","skanderbenosman6@gmail.com");
+			User u1=new User(b,"Mohamed skander","Ben osman","skanderbenosman6@gmail.com",1000);
 			Iterable<Advertisement> ads =AdRepository.findByUser(u1);
 			 System.out.println("skander");
 			for(Advertisement a: ads){
